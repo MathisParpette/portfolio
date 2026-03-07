@@ -1,0 +1,13 @@
+---
+// src/components/ExperienceCard.astro
+const { date, title, location, description, emoji } = Astro.props;
+---
+
+<div class="card">
+    <span class="badge">{date}</span>
+    <h3>{emoji} {title}</h3>
+    <p class="subtitle">{location}</p>
+    {description && (
+            <span class="card-desc">{description}</span>
+    )}
+</div>
