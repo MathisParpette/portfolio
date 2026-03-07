@@ -1,11 +1,186 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ExperienceCard from '../components/ExperienceCard.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const databaseSkills = ["SQL - PL/SQL", "SGBDR - (Oracle - MySql)", "Power BI", "NoSQL - Mongo DB"];
+const frontendSkills = ["HTML", "CSS", "React.js", "Tailwind CSS", "Astro" ,"JavaScript"];
+const backendSkills = ["PHP", "Python", "Node.js", "Symfony", "API REST", "Express.js"];
+const toolsSkills = ["Suite Office", "JetBrain", "Visual Code Studio", "Git", "Github", "GitLab", "Docker "];
+
+const experiences = [
+	{ date: "Sept 2025 - Aujourd'hui", title: "BUT Info 2ème année", location: "IUT Reims", description: "Parcours DATA", emoji: "👨‍💻" },
+	{ date: "Août 2025", title: "Cueilleur", location: "Laurent Fossé, Nogent l’Abesse", emoji: "🍾" },
+	{ date: "Juillet 2025", title: "Agent de silo", location: "Cérésia, Pomacle", emoji: "🌾" },
+	{ date: "Sept 2024 - Juin 2025", title: "BUT Info 1ère année", location: "IUT Reims", emoji: "👨‍💻" },
+	{ date: "Sept 2023 - Juin 2024", title: "Baccalauréat Technologique", location: "Lycée Saint Jean Baptiste de la Salle", description: "Parcours systèmes d'information et numérique", emoji: "🎓" },
+];
+
+const projects = [
+	{
+		title: "Oracle Red Bull Racing API",
+		description: "Une API REST structurée pour les données historiques des voitures de F1, exploitant des données extraites par web scraping.",
+		tags: ["Node.js", "Express", "Puppeteer", "API REST","CSS"],
+		githubLink: "https://github.com/MathisParpette/oracle-redbull-racing-api",
+		image: "/images/api-redbull.png"
+	},
+	{
+		title: "Mon Portfolio",
+		description: "Conception et développement d'un portfolio minimaliste et performant mettant en avant mes compétences en DATA et développement Web.",
+		tags: ["Astro", "JavaScript", "CSS", "HTML"],
+		githubLink: "https://github.com/MathisParpette/portfolio",
+		image: "/images/portfolio.png"
+	}
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Mathis Parpette">
+	<header class="navbar">
+		<nav class="nav-links">
+			<a href="#" class="nav-logo" aria-label="Retour à l'accueil">
+				<svg class="nav-logo-svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M4 20V6l6 6 6-6v14"></path>
+					<path d="M16 6h4l2 2v4l-2 2h-4"></path>
+				</svg>
+			</a>
+
+			<a href="#experience" class="nav-item">
+				<svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect>
+					<path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+				</svg>
+				<span class="nav-text">Parcours</span>
+			</a>
+
+			<a href="#projects" class="nav-item">
+				<svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"></path>
+					<path d="m10 11-2 2 2 2"></path>
+					<path d="m14 11 2 2-2 2"></path>
+				</svg>
+				<span class="nav-text">Projets</span>
+			</a>
+
+			<a href="#skills" class="nav-item">
+				<svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+					<rect width="20" height="14" x="2" y="8" rx="2" ry="2"></rect>
+					<line x1="2" y1="13" x2="22" y2="13"></line>
+					<line x1="7" y1="13" x2="7" y2="16"></line>
+					<line x1="17" y1="13" x2="17" y2="16"></line>
+				</svg>
+				<span class="nav-text">Compétences</span>
+			</a>
+
+			<a href="#links" class="nav-item">
+				<svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+					<path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+				</svg>
+				<span class="nav-text">Liens utiles</span>
+			</a>
+
+			<button id="theme-toggle" class="theme-toggle" aria-label="Changer de thème">
+				<svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M22 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path>
+				</svg>
+				<svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+				</svg>
+			</button>
+		</nav>
+	</header>
+
+	<main>
+		<section class="bio">
+			<h1>Mathis Parpette</h1>
+			<p>
+				Étudiant en BUT Informatique à Reims, je me spécialise dans l'ingénierie des données. Je conçois des architectures capables de centraliser et d'analyser des métriques techniques pour transformer des données brutes en indicateurs de performance.
+			</p>
+		</section>
+
+		<section id="experience">
+			<h2>Mon Parcours</h2>
+			<div class="experience-list">
+				{experiences.map((experience) => <ExperienceCard {...experience} />)}
+			</div>
+		</section>
+
+		<section id="projects" class="projects">
+			<h2>Mes Projets</h2>
+			<div class="projects-list">
+				{projects.map((project) => (
+					<ProjectCard {...project} />
+				))}
+			</div>
+		</section>
+
+		<section id="skills" class="skills">
+			<h2>Mes Compétences</h2>
+			<div class="skills-grid">
+				<div class="skills-column">
+					<h3>Bases de données</h3>
+					<ul>{databaseSkills.map((item) => <li>{item}</li>)}</ul>
+				</div>
+				<div class="skills-column">
+					<h3>Frontend</h3>
+					<ul>{frontendSkills.map((item) => <li>{item}</li>)}</ul>
+				</div>
+				<div class="skills-column">
+					<h3>Backend</h3>
+					<ul>{backendSkills.map((item) => <li>{item}</li>)}</ul>
+				</div>
+				<div class="skills-column">
+					<h3>Outils</h3>
+					<ul>{toolsSkills.map((item) => <li>{item}</li>)}</ul>
+				</div>
+			</div>
+		</section>
+
+		<section id="links" class="links">
+			<h2>Liens utiles</h2>
+			<div class="contact-actions">
+				<a href="https://github.com/MathisParpette" target="_blank" rel="noopener noreferrer" class="links-button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 9 18v4"></path>
+						<path d="M9 18c-4.51 2-5-2-7-2"></path>
+					</svg>
+					Github
+				</a>
+
+				<a href="mailto:mathis.parpette@icloud.com" class="links-button">
+					Me contacter par mail
+				</a>
+
+				<a href="https://www.linkedin.com/in/mathisparpette" target="_blank" rel="noopener noreferrer" class="links-button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+						<rect width="4" height="12" x="2" y="9"></rect>
+						<circle cx="4" cy="4" r="2"></circle>
+					</svg>
+					LinkedIn
+				</a>
+			</div>
+		</section>
+
+		<footer>
+			<p>© 2026 Mathis Parpette — Tous droits réservés.</p>
+		</footer>
+	</main>
+
+	<script is:inline>
+		const themeBtn = document.getElementById('theme-toggle');
+
+		if (themeBtn) {
+			themeBtn.addEventListener('click', () => {
+				document.body.classList.toggle('light-theme');
+				const isLight = document.body.classList.contains('light-theme');
+				localStorage.setItem('theme', isLight ? 'light' : 'dark');
+			});
+		}
+
+		if (localStorage.getItem('theme') === 'light') {
+			document.body.classList.add('light-theme');
+		}
+	</script>
 </Layout>
