@@ -6,23 +6,19 @@ const { title, description, tags = [], githubLink, image } = Astro.props;
 
 <div class="projects-item">
   {image && (
-      <div class="projects-item">
-        {image && (
-            <div class="projects-image">
-              {typeof image === 'object' ? (
-                  <Image
-                      src={image}
-                      alt={`Aperçu du projet ${title}`}
-                      width={800}
-                      height={450}
-                      format="webp"
-                      quality="mid"
-                      style={{ width: '100%', height: 'auto', display: 'block' }}
-                  />
-              ) : (
-                  <img src={image} alt={`Aperçu du projet ${title}`} loading="lazy" />
-              )}
-            </div>
+      <div class="projects-image">
+        {typeof image === 'object' ? (
+            <Image
+                src={image}
+                alt={`Aperçu du projet ${title}`}
+                width={800}
+                height={450}
+                format="webp"
+                quality="mid"
+                style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
+            />
+        ) : (
+            <img src={image} alt={`Aperçu du projet ${title}`} loading="lazy" />
         )}
       </div>
   )}
